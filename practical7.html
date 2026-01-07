@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body >
+    <style>
+        body {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    /* BACKGROUND IMAGE with Overlay */
+    background: linear-gradient(45deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3)),
+                url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1000');
+    background-size: cover;
+    background-position: center;
+}
+
+.card {
+    /* ADVANCED BOX MODEL PROPERTIES */
+    max-width: 500px;
+    padding: var(--spacing);     /* Internal space */
+    margin: 20px;                /* External space from other elements */
+    
+    /* BORDERS & RADIUS */
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    
+    /* GLASSMORPHISM & SHADOWS */
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px); /* Blurs the background image through the card */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    
+    color: white;
+    text-align: center;
+}
+
+.card h1 {
+    margin-bottom: 1.5rem; /* Separating the heading from paragraph */
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.btn {
+    margin-top: 2rem;
+    padding: 12px 30px;
+    background: var(--accent);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px); /* Interactive movement */
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+}
+    </style>
+
+    <div class="container">
+        <article class="card">
+            <h1>Advanced Box Model</h1>
+            <p>Exploring the relationship between margins, borders, and padding through glassmorphism design.</p>
+            <button class="btn">Learn More</button>
+        </article>
+    </div>
+</body>
+</html>
