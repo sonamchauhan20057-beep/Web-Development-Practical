@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simpe arithmetic calculator</title>
+        <style>
+            body{
+            font-family:Arial,Smas-serif;
+            background:linear-granted(to right,#320ab6,#ad050e);
+            display:flex;
+            align-items:center;
+            height:100vh;
+
+            }
+            .calculator{
+                background:white;
+                padding:25px;
+                border-radius:20px;
+                box-shadow:0 0 10px rgb(0,0,0,0,2);
+                text-align:center;
+                width:300px;
+            }
+            inpit{
+                width:90px;
+                padding:10px;
+                margin:5px;
+                background:#4caf50;
+                color:pointer;
+                font-size:18px;
+            }
+            button{
+                padding:10px 15px;
+                margin:5px;
+                border:none;
+                background:#4caf50;
+                color:white;
+                border-radius:5px;
+                cursor:pointer;
+                font-size:18px;
+            }
+            button:hover{
+                background:#45a049;
+            }
+            #reset{
+                background:#f44336;
+            }
+            #reset:hover{
+                background:#d32f2f;
+            }
+            #result{
+                margin-top:15px;
+                font-weight:bold;
+                font-size:18px;
+                text-align: center;
+
+            }
+
+        </style>
+    </head>
+    <body>
+        <div clas="calculator">
+            <h2> Basic Arithmetic operation</h2>
+            <input type="number"id="num1"placeholder="Enter First number"><br>
+            <input type="number"id="num2"placeholder="Enter Second number"><br>
+            <button onclick="calculator('+')">+</button>
+            <button onclick="calculator('-')">-</button>
+           <button onclick="calculator('*')">*</button>
+           <button onclick="calculator('/')">/</button><br>
+           <button id="reset"onclick="resetField()">Reset</button>
+
+           <div id="result"></div>
+           <script>
+            function calculator(operator){
+                        let n1 = parseFloat(document.getElementById("num1").value); 
+                        let n2 = parseFloat(document.getElementById("num2").value); 
+                        let result = ""; 
+ 
+                        if (isNaN(n1) || isNaN(n2)) { 
+                            result = "Please enter valid numbers!"; 
+                        } else { 
+                            switch(operator) { 
+                                case '+': result = n1 + n2; break; 
+                                case '-': result = n1 - n2; break; 
+                                case '*': result = n1 * n2; break; 
+                                case '/': result = n1 / n2; break;
+                                    result = (n2 !== 0) ? (n1 / n2) : "Cannot divide by zero!"; 
+                                    break; 
+                                default: result = "Invalid operation"; 
+                            } 
+            } 
+ 
+            document.getElementById("result").innerHTML = "Result: " + result; 
+        } 
+ 
+        function resetFields() { 
+            document.getElementById("num1").value = " "; 
+            document.getElementById("num2").value = " "; 
+            document.getElementById("result").innerHTML = " "; 
+        } 
+    </script> 
+ 
+</body> 
+</html> 
