@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Jvascripts  conditional statement and loops</title>
+    </head>
+    <body>
+    <h2> javascripts Conditional statements and looping</h2>
+    <pre id="output"></pre>
+    <script>
+        /*=====================
+        CONDITIONAL STATEMENTS
+        =======================*/
+
+        let num = 10;
+          console.log(" Conditional statement");
+      //if
+
+        if(num > 5){
+            console.log("Number is greater then 5\n");
+
+      //if-else
+
+        } else if (num %2==0){
+            console.log("Number is Even\n");
+        }
+        else{
+            console.log(" Number is odd\n");
+        }
+      // else if
+           if(num<0){
+            console.log("Number is negative\n");
+           }
+            else if(num==0){
+                console.log("Number is Zero\n");
+            }else{
+                console.log("Number is positive\n");
+            }
+
+            /*=========
+            SWITCH CASE
+            ===========*/ 
+            let grade = 'A'
+             console.log("\n switch statement:\n");
+             switch (grade){
+                    case 'A':
+                        console.log("Excellent\n");
+                        break;
+                    case 'B':
+                        console.log("Good\n");
+                        break;
+                    case 'C':
+                        console.log("Average\n");
+                        break;
+                    default:
+                        console.log("Invalid grade\n");
+             }
+
+            /*======
+             loop
+             =======*/
+             console.log("\n===LOOPS===\n");
+        // for loop
+             console.log("\n for loop (1 to 5):\n");
+
+             for(let i=1; i<=5;i++){
+                 console.log(i);
+          }
+
+       //while loop 
+
+            console.log("\n\nwhile loop (1 to 5):\n");
+            let j=1;
+           while(j<=5){
+                console.log(j);
+                j++;
+           }
+
+       //do.... while loop
+
+           console.log("\n\n do...while loop(1 to 5):\n");
+
+            let k=1;
+          do{
+             console.log(k);
+             k++;
+          } while(k<=5);
+
+      // display output on screen
+          document.getElementById("output").textcontent = console.log;
+
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM Manipulation Practical</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #e58585;
+            font-family: sans-serif;
+            text-align: center;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            width: 350px;
+        }
+        .highlight {
+            color: #ff5722;
+            font-weight: bold;
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2 id="mainHeading">Purani Heading</h2>
+
+        <p class="content">Yahan kuch purana text likha hai.</p>
+
+        <button onclick="manipulateDOM()">Magic Button ✨</button>
+    </div>
+
+    <script>
+        function manipulateDOM() {
+            // 1. getElementById() ka use karke element ko pakdna
+            const heading = document.getElementById('mainHeading');
+
+            // 2. innerHTML ka use karke content badalna
+            heading.innerHTML = "DOM Change Ho Gaya! 🎉";
+            heading.style.color = "#28a745"; // Green color
+
+            // 3. querySelector() ka use karke class ko pakdna
+            // Note: querySelector mein class ke liye '.' lagate hain
+            const text = document.querySelector('.content');
+
+            // innerHTML ke andar hum HTML tags bhi daal sakte hain
+            text.innerHTML = "Ab aap seekh rahe hain <span class='highlight'>DOM Manipulation</span> ek practical tarike se.";
+            
+            // Extra: Card ka background badalna querySelector se
+            document.querySelector('.card').style.borderColor = "#28a745";
+            document.querySelector('.card').style.borderWidth = "2px";
+            document.querySelector('.card').style.borderStyle = "solid";
+        }
+    </script>
+
+</body>
+</html>

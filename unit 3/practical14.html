@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    
+    <title>Proper Form Validation</title>
+    <style>
+        body { font-family: sans-serif; margin: 50px; background-color: #f4f4f4; }
+        .form-container { background: white; padding: 20px; border-radius: 8px; text-align: center;  justify-content: center;
+            align-items: center;box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 300px; }
+        input { width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box; }
+        .error-text { color: red; font-size: 12px; margin-bottom: 10px; display: block; height: 15px; }
+        button { width: 100%; padding: 10px; background: #28a745; color: white; border: none; cursor: pointer; }
+        button:hover { background: #218838; }
+    </style>
+</head>
+<body>
+  <h2> Form Validation using html javascript event </h2>
+<div class="form-container">
+    <h2>Signup Form</h2>
+    <form id="myBtnForm">
+        
+        <label>Username:</label>
+        <input type="text" id="username" placeholder="Min 6 characters">
+        <span id="userHint" class="error-text"></span>
+
+        <label>Password:</label>
+        <input type="text" id="Password" placeholder="Enter your password"required>
+        <span id="userHint" class="error-text"></span>
+
+        <label>Email:</label>
+        <input type="email" id="email" placeholder="example@mail.com">
+        <span id="emailHint" class="error-text"></span>
+
+         
+        <button type="submit">Submit Data</button>
+    </form>
+</div>
+
+<script>
+    // 1. Selecting the Elements 
+    const form = document.getElementById('myBtnForm');
+    const username = document.getElementById('username');
+    const userHint = document.getElementById('userHint');
+
+    /**
+      ONINPUT EVENT: 
+                   **/
+        // As soon as the user type ,he will get real-time feedback.
+
+    username.oninput = function() {
+        if (username.value.length > 0 && username.value.length < 5) {
+            userHint.innerText = "Bahut chhota hai...";
+            username.style.borderColor = "red";
+        } else {
+            userHint.innerText = "";
+            username.style.borderColor = "green";
+        }
+    };
+
+    /**
+     ONSUBMIT EVENT:
+                    **/ 
+     // When the user presses the button, the final validation will be check.
+     
+    form.onsubmit = function(event) {
+        // Preventing the form refreshing
+        event.preventDefault();
+
+        const userValue = username.value.trim();
+        const emailValue = document.getElementById('email').value.trim();
+
+        // Username Check
+        if (userValue === "") {
+            alert("Username cannot empty!");
+            return false;
+        }
+
+        if (userValue.length < 5) {
+            alert("Username should be at least 5 characters long.");
+            return false;
+        }
+
+        // Email Check
+        if (emailValue === "") {
+            alert("Email is required.");
+            return false;
+        }
+
+        // If everything is correct
+        alert("Success! your data is saved:\nUser: " + userValue + "\nEmail: " + emailValue);
+        
+        // Reseting the form after success
+        form.reset();
+        username.style.borderColor = ""; 
+    };
+</script>
+
+</body>
+</html>

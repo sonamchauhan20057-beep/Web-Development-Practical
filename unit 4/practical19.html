@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Shape Drawer</title>
+    <style>
+        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; background: #f0f0f0; margin: 0; padding: 20px; }
+        .toolbar { background: white; padding: 15px; border-radius: 10px; margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; gap: 15px; align-items: center; }
+        canvas { background: white; border: 2px solid #333; cursor: crosshair; border-radius: 5px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        button { padding: 8px 12px; cursor: pointer; border-radius: 4px; border: 1px solid #ccc; background: #fff; }
+        .active { background: #007bff; color: white; border-color: #0056b3; }
+        label { font-weight: bold; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <h2> Simple Drwaing using the Element : Draw shapes & fill colors</h2>
+
+    <div class="toolbar">
+        <label>Tool:</label>
+        <button id="brushBtn" class="active">Pencil</button>
+        <button id="rectBtn">Rectangle</button>
+        <button id="circleBtn">Circle</button>
+        <button id="tribtn"> Triangle</button>
+        
+        <label>Color:</label>
+        <input type="color" id="colorPicker" value="#000000">
+        
+        <button onclick="clearCanvas()" style="background: #ff4757; color:white;">Clear</button>
+    </div>
+
+    <canvas id="paintCanvas" width="800" height="500"></canvas>
+
+    <script>
+        const canvas = document.getElementById('paintCanvas');
+        const ctx = canvas.getContext('2d');
+        const colorPicker = document.getElementById('colorPicker');
+        
+        let drawing = false;
+        let tool = 'brush'; // Default tool
+        let startX, startY;
+        let snapshot; // Purani drawing ko save rakhne ke liye
+
+        // Tool Selection Logic
+        document.getElementById('brushBtn').onclick = (e) => setTool('brush', e.target);
+        document.getElementById('rectBtn').onclick = (e) => setTool('rect', e.target);
+        document.getElementById('circleBtn').onclick = (e) => setTool('circle', e.target);
+        document.getElementById('triBtn').onclick = (e) => setTool('Triangle', e.target);
+
+
+        function setTool(newTool, btn) {
+            tool = newTool;
+            document.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        // Mouse Events
+        canvas.addEventListener('mousedown', (e) => {
+            drawing = true;
+            startX = e.offsetX;
+            startY = e.offsetY;
+            ctx.beginPath();
+            ctx.strokeStyle = colorPicker.value;
+            ctx.lineWidth = 2;
+            // Canvas ki current state ka photo lelo (snapshot)
+            snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (!drawing) return;
+            
+            // Har move par pichla snapshot wapas dalo (taaki shape "khichta" hua dikhe)
+            if (tool !== 'brush') {
+                ctx.putImageData(snapshot, 0, 0);
+            }
+
+            if (tool === 'brush') {
+                ctx.lineTo(e.offsetX, e.offsetY);
+                ctx.stroke();
+            } else if (tool === 'rect') {
+                ctx.strokeRect(startX, startY, e.offsetX - startX, e.offsetY - startY);
+            } else if (tool === 'circle') {
+                ctx.strokeRect(startX, startY, e.offsetX - startX, e.offsetY - startY);
+            } else if (tool === 'Triangle') {
+                let radius = Math.sqrt(Math.pow(startX - e.offsetX, 2) + Math.pow(startY - e.offsetY, 2));
+                ctx.beginPath();
+                ctx.arc(startX, startY, radius, 0, 2 * Math.PI);
+                ctx.stroke();
+            }
+        });
+
+        canvas.addEventListener('mouseup', () => drawing = false);
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    </script>
+
+</body>
+</html>

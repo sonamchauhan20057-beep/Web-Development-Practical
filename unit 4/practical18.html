@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Element Factory</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; text-align: center; padding: 50px; background: #f4f4f9; }
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); width: 350px; }
+        
+        #list-container { margin-top: 20px; padding: 0; list-style: none; }
+        
+        .item { 
+            background: #eee; margin: 5px 0; padding: 10px; 
+            display: flex; justify-content: space-between; align-items: center;
+            border-radius: 5px; animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+
+        .btn-add { background: #2ecc71; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; width: 100%; }
+        .btn-del { background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; }
+        .btn-edit { background: #f1c40f; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; margin-right: 5px; }
+        
+        input { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h3>Item Manager</h3>
+    <input type="text" id="itemInput" placeholder="Enter item name...">
+    <button class="btn-add" onclick="addNewItem()">+ Add New Element</button>
+
+    <ul id="list-container">
+        </ul>
+</div>
+
+<script>
+    const listContainer = document.getElementById('list-container');
+    const inputField = document.getElementById('itemInput');
+
+    // 1. CREATE & APPEND Element
+    function addNewItem() {
+        const text = inputField.value;
+        if (text === "") return alert("Kuch toh likho!");
+
+        // Naya 'li' element banana
+        const li = document.createElement('li');
+        li.className = 'item';
+
+        // Content set karna
+        li.innerHTML = `
+            <span>${text}</span>
+            <div>
+                <button class="btn-edit" onclick="modifyItem(this)">Edit</button>
+                <button class="btn-del" onclick="removeItem(this)">Remove</button>
+            </div>
+        `;
+
+        // Parent (ul) ke andar child (li) ko daalna
+        listContainer.appendChild(li);
+        
+        inputField.value = ""; // Input clear karna
+    }
+
+    // 2. REMOVE Child
+    function removeItem(btn) {
+        // btn -> div -> li (li target hai)
+        const liToRemove = btn.parentElement.parentElement;
+        
+        // Parent se child ko delete karna
+        listContainer.removeChild(liToRemove);
+    }
+
+    // 3. MODIFY / REPLACE Child
+    function modifyItem(btn) {
+        const liToEdit = btn.parentElement.parentElement;
+        const oldSpan = liToEdit.querySelector('span');
+        
+        // Naya element banana replacement ke liye
+        const newSpan = document.createElement('span');
+        newSpan.innerHTML = "<b>(Edited)</b> " + oldSpan.innerText;
+        newSpan.style.color = "#2980b9";
+
+        // Purane span ko naye span se badal dena
+        liToEdit.replaceChild(newSpan, oldSpan);
+    }
+</script>
+
+</body>
+</html>
