@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Local Shop Website</title>
+
+<!-- ===== INTERNAL CSS ===== -->
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+}
+
+header{
+    background:#2c3e50;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+nav{
+    background:#34495e;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    justify-content:center;
+}
+
+nav ul li a{
+    color:white;
+    padding:15px 20px;
+    display:block;
+    text-decoration:none;
+}
+
+nav ul li a:hover{
+    background:#1abc9c;
+}
+
+section{
+    background:white;
+    margin:20px;
+    padding:20px;
+    border-radius:8px;
+}
+
+h2{
+    color:#2c3e50;
+    margin-bottom:10px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+
+table,th,td{
+    border:1px solid #aaa;
+}
+
+th,td{
+    padding:10px;
+    text-align:center;
+}
+
+img,video{
+    width:100%;
+    max-width:400px;
+    margin-top:10px;
+}
+
+form input,textarea{
+    width:100%;
+    padding:10px;
+    margin-bottom:10px;
+}
+
+footer{
+    background:#2c3e50;
+    color:white;
+    text-align:center;
+    padding:15px;
+}
+
+/* Responsive */
+@media(max-width:768px){
+    nav ul{
+        flex-direction:column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+<h1>Local Shop Hub</h1>
+<p>Grocery • Clothing • Book Store</p>
+</header>
+
+<!-- ===== NAVIGATION ===== -->
+<nav>
+<ul>
+<li><a href="#grocery">Grocery</a></li>
+<li><a href="#clothing">Clothing</a></li>
+<li><a href="#book">Book Store</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+
+<main>
+
+<!-- ================= GROCERY SHOP ================= -->
+<section id="grocery">
+<h2>🛒 Grocery Store</h2>
+<p>Fresh daily essentials available at affordable prices.</p>
+
+<ul>
+<li>Rice</li>
+<li>Milk</li>
+<li>Vegetables</li>
+<li>Fruits</li>
+</ul>
+
+<table>
+<tr><th>Item</th><th>Price (₹)</th></tr>
+<tr><td>Rice</td><td>60</td></tr>
+<tr><td>Milk</td><td>50</td></tr>
+</table>
+
+<img src="https://via.placeholder.com/400x250" alt="Grocery Shop">
+</section>
+
+<!-- ================= CLOTHING SHOP ================= -->
+<section id="clothing">
+<h2>👕 Clothing Store</h2>
+<p>Latest fashion for men, women and kids.</p>
+
+<ol>
+<li>Men Wear</li>
+<li>Women Wear</li>
+<li>Kids Wear</li>
+</ol>
+
+<table>
+<tr><th>Item</th><th>Price (₹)</th></tr>
+<tr><td>T-Shirt</td><td>499</td></tr>
+<tr><td>Jeans</td><td>1299</td></tr>
+</table>
+
+<img src="https://via.placeholder.com/400x250" alt="Clothing Shop">
+</section>
+
+<!-- ================= BOOK STORE ================= -->
+<section id="book">
+<h2>📚 Book Store</h2>
+<p>Educational and story books available.</p>
+
+<ul>
+<li>Programming Books</li>
+<li>Science Books</li>
+<li>Novels</li>
+</ul>
+
+<table>
+<tr><th>Book Name</th><th>Price (₹)</th></tr>
+<tr><td>HTML Basics</td><td>299</td></tr>
+<tr><td>CSS Guide</td><td>349</td></tr>
+</table>
+</section>
+
+<!-- ================= MULTIMEDIA ================= -->
+<section>
+<h2>🎥 Shop Introduction Video</h2>
+<video controls>
+<source src="sample-video.mp4" type="video/mp4">
+Your browser does not support video.
+</video>
+</section>
+
+<!-- ================= CONTACT FORM ================= -->
+<section id="contact">
+<h2>📩 Contact Us</h2>
+<form>
+<input type="text" placeholder="Name">
+<input type="email" placeholder="Email">
+<textarea placeholder="Message"></textarea>
+<input type="submit" value="Submit">
+</form>
+</section>
+
+<!-- ================= EMBEDDED MAP ================= -->
+<section>
+<h2>📍 Our Location</h2>
+<iframe src="https://www.google.com/maps" width="400" height="250"></iframe>
+</section>
+
+</main>
+
+<!-- ===== ASIDE ===== -->
+<aside style="text-align:center; padding:20px;">
+<h3>⏰ Shop Timing</h3>
+<p>Monday – Sunday</p>
+<p>9:00 AM – 9:00 PM</p>
+</aside>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+<p>© 2025 Local Shop Hub</p>
+<p>Contact: +91 9876543210</p>
+</footer>
+
+</body>
+</html>

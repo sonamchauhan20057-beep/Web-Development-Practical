@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Modern JS Dynamic Shop</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    margin:0;
+    background:#f4f4f4;
+}
+header{
+    background:#1e88e5;
+    color:white;
+    padding:15px;
+    text-align:center;
+}
+.search{
+    text-align:center;
+    margin:15px;
+}
+.search input{
+    padding:8px;
+    width:280px;
+}
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,250px);
+    gap:20px;
+    padding:20px;
+    justify-content:center;
+}
+.card{
+    background:white;
+    padding:15px;
+    border-radius:8px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+.card img{
+    width:100%;
+    height:150px;
+    object-fit:contain;
+}
+.card button{
+    background:#1e88e5;
+    color:white;
+    border:none;
+    padding:7px 12px;
+    cursor:pointer;
+}
+.cart{
+    background:white;
+    margin:20px;
+    padding:15px;
+    border-radius:8px;
+}
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:8px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🛍️ Dynamic Shop Website</h1>
+<p>Modern JavaScript (ES6 + API)</p>
+</header>
+
+<div class="search">
+<input type="text" id="search" placeholder="Search products...">
+</div>
+
+<div class="products" id="productList"></div>
+
+<div class="cart">
+<h2>🧾 Cart</h2>
+<div id="cartItems"></div>
+<p><b>Total: ₹<span id="total">0</span></b></p>
+</div>
+
+<script>
+// ================= MODERN JS =================
+
+// API URL
+const API_URL = "https://fakestoreapi.com/products";
+
+// State
+let products = [];
+let cart = [];
+
+// Fetch products from API
+const fetchProducts = async () => {
+    const response = await fetch(API_URL);
+    products = await response.json();
+    displayProducts(products);
+};
+
+// Display products (DOM manipulation)
+const displayProducts = (data) => {
+    const productList = document.getElementById("productList");
+    productList.innerHTML = "";
+
+    data.forEach(({id, title, price, image}) => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+            <img src="${image}">
+            <h4>${title}</h4>
+            <p>₹${price}</p>
+            <button data-id="${id}">Add to Cart</button>
+        `;
+        productList.appendChild(card);
+    });
+};
+
+// Event Delegation for Add to Cart
+document.getElementById("productList").addEventListener("click", (e) => {
+    if(e.target.tagName === "BUTTON"){
+        const id = Number(e.target.dataset.id);
+        addToCart(id);
+    }
+});
+
+// Add to Cart
+const addToCart = (id) => {
+    const product = products.find(p => p.id === id);
+
+    const item = cart.find(i => i.id === id);
+    if(item){
+        item.qty++;
+    }else{
+        cart.push({...product, qty:1});
+    }
+    updateCart();
+};
+
+// Update Cart UI
+const updateCart = () => {
+    const cartDiv = document.getElementById("cartItems");
+    cartDiv.innerHTML = "";
+
+    cart.forEach(({title, price, qty}) => {
+        const div = document.createElement("div");
+        div.className = "cart-item";
+        div.innerHTML = `${title} x ${qty} - ₹${price * qty}`;
+        cartDiv.appendChild(div);
+    });
+
+    const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+    document.getElementById("total").innerText = total.toFixed(2);
+};
+
+// Search (Event Handling + Array filter)
+document.getElementById("search").addEventListener("input", (e) => {
+    const value = e.target.value.toLowerCase();
+    const filtered = products.filter(p =>
+        p.title.toLowerCase().includes(value)
+    );
+    displayProducts(filtered);
+});
+
+// Load products
+fetchProducts();
+
+</script>
+
+</body>
+</html>
